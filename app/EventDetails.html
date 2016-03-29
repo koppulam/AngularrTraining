@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="Events">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Event Details</title>
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+	<style type="text/css" >
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+	.redColr  {
+		color: red;
+	}
+	</style>
+</head>
+<body ng-cloak ng-controller="eventsController">
+	<img ng-src="{{eventDetails.logoSrc}}" alt="logoSrc">
+	<div class="container">
+		<h1>{{eventDetails.name }}</h1>
+		<div class="row thumbnail">
+			<div class="col-md-4">
+				Training Name : {{eventDetails.name}} monika
+			</div>
+			<div class="col-md-4">
+				Location : {{eventDetails.location}}
+			</div>
+		</div>
+		<div class="row thumbnail">
+			<div class="col-md-4">
+				Duration : <span ng-bind-template="{{eventDetails.duration}}  in {{eventDetails.location}}"></span>
+			</div>
+			<div class="col-md-4">
+				Presented By : {{eventDetails.trainerName}}
+			</div>
+			<div class="col-md-4">
+				Cost of the training : {{eventDetails.cost | currency :'₹' :  3}}
+			</div>
+		</div>
+
+		<div class="row thumbnails">
+			<h2>Sessions</h2>
+			<div>
+				<strong>Order By</strong>
+				<select name="orderByDropdown" ng-model="orderByParam" >
+					<option value="count">count</option>
+					<option value="name">name</option>
+				</select>
+
+				<input type="text" name="" ng-model="filterText" placeholder="">
+			</div>
+			<div class="row thumbnail" ng-repeat="session in eventDetails.sessions | orderBy : orderByParam | filter:filterText "
+			 >
+			 <div class="col-md-4">
+			 	<div class="votingButton">
+						<i class="glyphicon glyphicon-chevron-up" ng-click="upMyVote(session)"></i>
+					</div>
+					<div class="badge badge-inverse">
+						<div>{{session.count}}</div>
+					</div>
+					<div class="votingButton">
+						<i class="glyphicon glyphicon-chevron-down" ng-click="downMyVote(session)"></i>
+					</div>
+				 </div>
+			 <div class="col-md-8" ng-class="{redColr : (session.count <0 )}">
+			  {{message}}
+				<p>{{session.name}} </p>
+				 <p>{{session.description}} </p>
+				 <p> Duration : {{session.duration | durationFormatter}}
+				 <p> Level : {{session.level}} </p>
+			</div>
+				 	
+			</div>
+			<div ng-show="eventDetails.sessions.length === 0">
+				There are no sessions available
+			</div>
+			<div ng-if="eventDetails.sessions.length === 0">
+				There are no sessions available
+			</div>
+		</div>
+	</div>
+
+	<h1 ng-bind="eventNameOnService"></h1>
+	<input type="text" name="" ng-blur="onFocusOut()" ng-focus="onFocus()" ng-disabled="isEditable" ng-model="eventDetails.name"  placeholder="">
+{{ focusMessage}}
+	
+	<h1>{{myName}}</h1>
+	<script src="/node_modules/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="/app/main.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="/app/controllers/EventsController.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/app/filters/durationFormater.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/app/services/EventService.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="Events">
+<head>
+	<title>Add Modify Event </title>
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+	<style type="text/css" >
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		  display: none !important;
+		}
+
+		.redColr  {
+			color: red;
+		}
+	</style>
+</head>
+<body ng-controller="AddModifyEventsController">
+
+<form name="eventDetail" ng-submit="submitHandler()">
+	Event name: * <br>
+      <input type="text" required name="eventname" ng-model="eventName" value="">
+      {{eventName}}
+		  <br>
+		  Last name: <br>
+		      <input type="text" name="lastname" value="">
+		  <br>
+		  Start date:<br>
+		      <input type="text" name="Startdate" value="">
+		  <br>
+		  Email:<br>
+		      <input type="email" ng-model="userEmail" required name="Startdate" value="">
+		  <br>
+		  End date:<br>
+		  <input type="number" name="" value="" placeholder="">
+		  <input type="text" name="Enddate" value=""><br>
+		  Search Training:
+		  <input type="search" name="googlesearch">
+		  <input type="submit"><br><br>
+		  <input type="radio" name="gender" value="male"> Male
+		<input type="radio"  name="gender" value="female"> Female<br><br>
+		<input type="checkbox" checked="checked"> 
+		<input type="radio" name="public1" value="public"> Public
+		<input type="radio" name="public1" value="on request"> On request<br>
+		<br>
+		  <input type="file" name=" " accept=" "><br>
+		  <input type="submit">
+</form>
+<script src="/node_modules/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+<script src="/app/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="/app/controllers/AddModifyEventsController.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="/app/controllers/EventsController.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/app/filters/durationFormater.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/app/services/EventService.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
